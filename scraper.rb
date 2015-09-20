@@ -27,7 +27,7 @@ def scrape_list(url)
     dl.css('dd').each do |dd|
       source = dd.css('a[href*="www.al.gov.mo"]/@href').text
       data = scrape_person(source).merge({ 
-        term: 9,
+        term: 10,
         wikiname__zh: dd.xpath('.//a[not(@class="new")]/@title').text 
       })
       # puts data
