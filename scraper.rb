@@ -3,8 +3,8 @@
 
 require 'scraperwiki'
 require 'nokogiri'
-require 'colorize'
 require 'pry'
+
 require 'open-uri/cached'
 OpenURI::Cache.cache_path = '.cache'
 
@@ -35,13 +35,13 @@ def scrape_list(url)
     end
   end
 end
-      
+
 def scrape_person(url)
   noko = noko_for(url)
   name_zh_field = '中文姓名'
   name_en_field = '葡文姓名'
 
-  data = { 
+  data = {
     id: File.basename(url, '.*').gsub('%20','_'),
     name__zh: noko.xpath('//table//tr[contains(.,"%s")]/td//span' % name_zh_field).text,
     name__en: noko.xpath('//table//tr[contains(.,"%s")]/td[2]' % name_en_field).text.tidy,
